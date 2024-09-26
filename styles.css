@@ -1,0 +1,236 @@
+body {
+  font-family: 'Poppins', sans-serif; /* Fonte mais moderna e suave */
+  background: linear-gradient(135deg, #6D5BBA, #8C7AE6); /* Gradiente para o fundo */
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #F5F5F5; /* Texto claro em contraste com fundo escuro */
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3); /* Sombras suaves no texto */
+}
+header{
+  text-align: center;
+}
+
+.btn-primary {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  background-color: #FF6B6B; /* Cor vibrante */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 5px 15px rgba(255, 107, 107, 0.3); /* Sombra forte */
+}
+
+.btn-primary:hover {
+  background-color: #47ff47; /* Cor mais escura ao passar o mouse */
+  transform: scale(1.1); /* Efeito de zoom no hover */
+}
+
+
+/* Board - Layout das colunas */
+.board {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  gap: 20px;
+}
+
+.coluna {
+  background: rgba(255, 255, 255, 0.8); /* Transparência no fundo */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  backdrop-filter: blur(10px); /* Efeito de desfoque no fundo */
+  transition: transform 0.3s ease;
+}
+
+.coluna:hover {
+  transform: translateY(-10px);
+}
+
+
+/* Lista de tarefas */
+.lista-tarefas {
+  list-style-type: none;
+  padding: 0;
+}
+.lista-tarefas li {
+  background-color: #FFFFFF;
+  margin-bottom: 15px;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column; /* Muda o layout para coluna */
+  justify-content: center;
+  align-items: center; 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.lista-tarefas li:hover {
+  transform: translateY(-10px); /* Efeito de elevação ao passar o mouse */
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+.lista-tarefas li button {
+  margin-top: 10px; /* Espaçamento entre o texto e o botão */
+  align-self: center; /* Centraliza o botão horizontalmente */
+  padding: 10px 20px; /* Aumenta o tamanho do botão para maior destaque */
+  width: 50%; /* Ajusta a largura do botão para deixá-lo mais elegante */
+  text-align: center;
+}
+
+
+button.mover-tarefa, button.remover-tarefa {
+  text-align: center;
+  background-color: #FF6B6B;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.mover-tarefa:hover {
+  background-color: #37c434;
+  transform: scale(1.05);
+}
+
+button.remover-tarefa {
+  background-color: #ff4757;
+  color: white;
+}
+
+
+/* Modal para adicionar tarefas */
+/* Garantir que o modal fique acima de todos os outros elementos */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Define um z-index alto para o modal */
+}
+
+/* Certificar que o conteúdo do modal também esteja acima */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+  z-index: 10000; /* Define um z-index ainda maior para o conteúdo do modal */
+}
+
+
+.modal-content input {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-content button {
+  width: 100%;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: red;
+}
+
+footer {
+  background-color: #2d2d2d;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.lista-tarefas li[data-status="pendente"] {
+  background-color: white;
+}
+
+.lista-tarefas li[data-status="andamento"] {
+  background-color: orange;
+}
+
+.lista-tarefas li[data-status="progresso"] {
+  background-color: purple;
+}
+
+.lista-tarefas li[data-status="concluida"] {
+  background-color: green;
+}
+/* Animação chamativa */
+@keyframes moverTarefa {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Classe para aplicar a animação */
+.tarefa-animada {
+  animation: moverTarefa 1s ease-in-out;
+}
+
+@keyframes aparecer {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.coluna, .lista-tarefas li {
+  animation: aparecer 0.5s ease forwards;
+}
+
+#typing-text {
+  font-weight: bold;
+  color: #37c434; /* Exemplo de cor, pode personalizar */
+  border-right: 2px solid #37c434; /* Para simular o cursor */
+  animation: blink 0.7s infinite; /* Animação de piscar do cursor */
+}
+
+@keyframes blink {
+  0% {
+    border-right-color: #ff4c4c;
+  }
+  50% {
+    border-right-color: transparent;
+  }
+  100% {
+    border-right-color: #ff4c4c;
+  }
+}
